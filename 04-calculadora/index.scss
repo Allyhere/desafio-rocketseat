@@ -23,7 +23,7 @@ main {
     grid-auto-flow: row;
     max-width: 280px;
   }
-  .display {
+  &__display {
     text-align: left;
     overflow: hidden;
     text-overflow: ellipsis;
