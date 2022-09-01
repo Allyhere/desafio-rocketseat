@@ -1,0 +1,73 @@
+:root {
+  font-family: Recursive, sans-serif;
+  --clr-font-main: hsla(0 0% 20% / 100);
+  --size: clamp(1rem, 10vmin, 3rem);
+}
+
+body {
+  display: grid;
+  place-items: center;
+  min-block-size: 100vh;
+}
+
+.btn-donate {
+  --btn-bg-1: hsla(194 100% 69% / 1);
+  --btn-bg-2: hsla(217 100% 56% / 1);
+  --btn-bg-color: hsla(360 100% 100% / 1);
+  --radii: 22px;
+  cursor: pointer;
+  padding: 0.9em 1.4em;
+  min-width: 120px;
+  min-height: 44px;
+  width: max-content;
+  font-size: var(--size, 3rem);
+  font-family: "Recursive", sans-serif;
+  font-weight: 500;
+  transition: 350ms;
+  background-size: 280% auto;
+  background-image: linear-gradient(
+    325deg,
+    var(--btn-bg-2) 0%,
+    var(--btn-bg-1) 55%,
+    var(--btn-bg-2) 90%
+  );
+  border: none;
+  border-radius: var(--radii);
+  box-shadow: 0px 0px 20px rgba(71, 184, 255, 0.5),
+    0px 5px 5px -1px rgba(58, 125, 233, 0.25),
+    inset 4px 4px 8px rgba(175, 230, 255, 0.5),
+    inset -4px -4px 8px rgba(19, 95, 216, 0.35);
+  color: var(--btn-bg-color);
+}
+.btn-donate:hover {
+  background-position: right top;
+}
+
+.btn-donate:is(:focus, :focus-within, :active) {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--btn-bg-color), 0 0 0 6px var(--btn-bg-2);
+}
+
+.control {
+  display: grid;
+  grid-template-columns: max-content 1fr max-content;
+  grid-auto-rows: 3ch;
+  place-items: center;
+  gap: 1ch 2ch;
+  color: var(--clr-font-main);
+}
+.control__legend {
+  grid-column: -1/1;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.control__color {
+  width: 80%;
+  border: none;
+}
+
+@media (prefers-reduced-motion) {
+  .btn-donate {
+    transition: linear;
+  }
+}
