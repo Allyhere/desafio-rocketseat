@@ -1,5 +1,5 @@
 const calculator = document.querySelector(".calculator")
-const display = document.querySelector(".display")
+const display = document.querySelector(".calculator__display")
 const COMMAND_INPUTS = ["=", "clear", "delete"]
 const COMMAND_INPUTS_MAP = {
   "=": "=",
@@ -14,13 +14,15 @@ const DECIMAL_LENGTH = 10
 let operation = []
 let equalCounter = 0
 
+const formatNumber = number => new Intl.NumberFormat('pt-BR').format(number)
+const stringfyOperation = value => value.join("").toString()
+
 window.addEventListener("keydown", ({ key }) => {
   const isDigit = new RegExp(/\d/)
   const isOperation = OPERATION_INPUTS.includes(key)
-  const isCommand = COMMAND_INPUTS_MAP[key
-  ]
+  const isCommand = COMMAND_INPUTS_MAP[key]
   const isRepeatedOperation =
-    OPERATION_INPUTS.includes(lastOperator()) &&
+    OPERATION_INPUTS.includes(operation.at(-1)) &&
     OPERATION_INPUTS.includes(key)
   
   if (isRepeatedOperation) return
@@ -40,24 +42,13 @@ calculator.addEventListener("click", ({ target }) => {
   if (target.nodeName !== "BUTTON") return
   const entry = target.innerHTML
   const isRepeatedOperation =
-    OPERATION_INPUTS.includes(lastOperator()) &&
+    OPERATION_INPUTS.includes(operation.at(-1)) &&
     OPERATION_INPUTS.includes(entry)
   
   if (isRepeatedOperation) return 
   operationMap[entry]?.() || addToOperation(entry)
   updateDisplay()
 })
-
-const formatNumber = number => new Intl.NumberFormat('pt-BR').format(number)
-
-const lastOperator = () => operation.at(-1)
-
-const lastOperation = () => {
-  const lastOperationRegex = new RegExp(/([+\/\*-](\d+)$)/)
-  return stringfyOperation(operation).match(lastOperationRegex)?.[0]
-}
-
-const stringfyOperation = value => value.join("").toString()
 
 const addToOperation = input =>  {
   if (COMMAND_INPUTS.includes(input)) return
